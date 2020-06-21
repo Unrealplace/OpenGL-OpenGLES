@@ -1,211 +1,333 @@
 #include "GLShaderManager.h"
-
 #include "GLTools.h"
-
 #include "GLFrame.h"
-
 #include "GLFrustum.h"
-
 #include "GLMatrixStack.h"
-
-
 #include "GLGeometryTransform.h"
-
-
 #include <glut/glut.h>
 
-
-GLBatch    squareBatch;
-GLBatch greenBatch;
-GLBatch redBatch;
-GLBatch blueBatch;
-GLBatch blackBatch;
-
-GLShaderManager    shaderManager;
-
-
-GLfloat blockSize = 0.2f;
-GLfloat vVerts[] = { -blockSize, -blockSize, 0.0f,
-                      blockSize, -blockSize, 0.0f,
-                      blockSize,  blockSize, 0.0f,
-                     -blockSize,  blockSize, 0.0f};
-
-///////////////////////////////////////////////////////////////////////////////
-// This function does any needed initialization on the rendering context.
-// This is the first opportunity to do any OpenGL related tasks.
+// 点
+GLBatch batch_points;
+// 点线
+GLBatch batch_line;
+// 线段依次连接
+GLBatch batch_lineStrip;
+// 线段依次连接并且首位相连
+GLBatch batch_lineClose;
+// 三角
+GLBatch batch_trangle;
+// 三角依次连接
+GLBatch batch_trangleStrip;
+// 三角环
+GLBatch batch_trangleFan;
+ 
+GLMatrixStack modelViewStack;
+GLMatrixStack projectionStack;
+GLFrame cameraFrame;
+// 世界坐标系
+GLFrame objectFrame;
+GLFrustum viewFrustum;
+GLShaderManager shaderManager;
+GLGeometryTransform transformPipeLine;
+ 
+GLfloat vGreen[] = {0.0, 1.0, 0.0, 1.0};
+GLfloat vBlack[] = {0.0, 0.0, 0.0, 1.0};
+GLint g_step = 0;
+ 
 void SetupRC()
-    {
-    // Black background
-    glClearColor(1.0f, 1.0f, 1.0f, 1.0f );
-    
+{
+    glClearColor(0.7f, 0.7f, 0.7f, 1.0f);
+    // 创建存储着色器
     shaderManager.InitializeStockShaders();
-
-    // Load up a triangle fan
-    squareBatch.Begin(GL_TRIANGLE_FAN, 4);
-    squareBatch.CopyVertexData3f(vVerts);
-    squareBatch.End();
-
-    GLfloat vBlock[] = { 0.25f, 0.25f, 0.0f,
-                         0.75f, 0.25f, 0.0f,
-                         0.75f, 0.75f, 0.0f,
-                         0.25f, 0.75f, 0.0f};
+    // 开启深度测试
+    glEnable(GL_DEPTH_TEST);
+    transformPipeLine.SetMatrixStacks(modelViewStack, projectionStack);
+    //移动相机原点，否则看不到后续绘制的图案
+    cameraFrame.MoveForward(-15.0f);
     
-    greenBatch.Begin(GL_TRIANGLE_FAN, 4);
-    greenBatch.CopyVertexData3f(vBlock);
-    greenBatch.End();
-    
-
-    GLfloat vBlock2[] = { -0.75f, 0.25f, 0.0f,
-                          -0.25f, 0.25f, 0.0f,
-                          -0.25f, 0.75f, 0.0f,
-                          -0.75f, 0.75f, 0.0f};
-        
-    redBatch.Begin(GL_TRIANGLE_FAN, 4);
-    redBatch.CopyVertexData3f(vBlock2);
-    redBatch.End();
-    
-
-    GLfloat vBlock3[] = { -0.75f, -0.75f, 0.0f,
-                        -0.25f, -0.75f, 0.0f,
-                        -0.25f, -0.25f, 0.0f,
-                        -0.75f, -0.25f, 0.0f};
-        
-    blueBatch.Begin(GL_TRIANGLE_FAN, 4);
-    blueBatch.CopyVertexData3f(vBlock3);
-    blueBatch.End();
-
-
-    GLfloat vBlock4[] = { 0.25f, -0.75f, 0.0f,
-                        0.75f, -0.75f, 0.0f,
-                        0.75f, -0.25f, 0.0f,
-                        0.25f, -0.25f, 0.0f};
-        
-    blackBatch.Begin(GL_TRIANGLE_FAN, 4);
-    blackBatch.CopyVertexData3f(vBlock4);
-    blackBatch.End();
-    }
-
-// Respond to arrow keys by moving the camera frame of reference
-void SpecialKeys(int key, int x, int y)
+    // 24个顶点
+    GLfloat vCoast[24][3] =
+    {{2.80, 1.20, 0.0 }, {2.0,  1.20, 0.0 },
+    {2.0,  1.08, 0.0 },  {2.0,  1.08, 0.0 },
+    {0.0,  0.80, 0.0 },  {-.32, 0.40, 0.0 },
+    {-.48, 0.2, 0.0 },   {-.40, 0.0, 0.0 },
+    {-.60, -.40, 0.0 },  {-.80, -.80, 0.0 },
+    {-.80, -1.4, 0.0 },  {-.40, -1.60, 0.0 },
+    {0.0, -1.20, 0.0 },  { .2, -.80, 0.0 },
+    {.48, -.40, 0.0 },   {.52, -.20, 0.0 },
+    {.48,  .20, 0.0 },   {.80,  .40, 0.0 },
+    {1.20, .80, 0.0 },   {1.60, .60, 0.0 },
+    {2.0, .60, 0.0 },    {2.2, .80, 0.0 },
+    {2.40, 1.0, 0.0 },   {2.80, 1.0, 0.0 }};
+ 
+    batch_points.Begin(GL_POINTS, 24);
+    batch_points.CopyVertexData3f(vCoast);
+    batch_points.End();
+ 
+    batch_line.Begin(GL_LINES, 24);
+    batch_line.CopyVertexData3f(vCoast);
+    batch_line.End();
+ 
+    batch_lineStrip.Begin(GL_LINE_STRIP, 24);
+    batch_lineStrip.CopyVertexData3f(vCoast);
+    batch_lineStrip.End();
+ 
+    batch_lineClose.Begin(GL_LINE_LOOP, 24);
+    batch_lineClose.CopyVertexData3f(vCoast);
+    batch_lineClose.End();
+ 
+    //==============金字塔==============//
+    GLfloat vPyramid[12][3] =
     {
-    GLfloat stepSize = 0.025f;
-
-    GLfloat blockX = vVerts[0];   // Upper left X
-    GLfloat blockY = vVerts[7];  // Upper left Y
-
-    if(key == GLUT_KEY_UP)
-        blockY += stepSize;
-
-    if(key == GLUT_KEY_DOWN)
-        blockY -= stepSize;
-    
-    if(key == GLUT_KEY_LEFT)
-        blockX -= stepSize;
-
-    if(key == GLUT_KEY_RIGHT)
-        blockX += stepSize;
-
-    // Collision detection
-    if(blockX < -1.0f) blockX = -1.0f;
-    if(blockX > (1.0f - blockSize * 2)) blockX = 1.0f - blockSize * 2;;
-    if(blockY < -1.0f + blockSize * 2)  blockY = -1.0f + blockSize * 2;
-    if(blockY > 1.0f) blockY = 1.0f;
-
-    // Recalculate vertex positions
-    vVerts[0] = blockX;
-    vVerts[1] = blockY - blockSize*2;
-    
-    vVerts[3] = blockX + blockSize*2;
-    vVerts[4] = blockY - blockSize*2;
-    
-    vVerts[6] = blockX + blockSize*2;
-    vVerts[7] = blockY;
-
-    vVerts[9] = blockX;
-    vVerts[10] = blockY;
-
-    squareBatch.CopyVertexData3f(vVerts);
-
-    glutPostRedisplay();
-    }
-
-
-
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Called to draw scene
-void RenderScene(void)
+      -2.0f, 0.0f, -2.0f,    2.0f, 0.0f, -2.0f,     0.0f, 4.0f, 0.0f,
+       2.0f, 0.0f, -2.0f,    2.0f, 0.0f, 2.0f,      0.0f, 4.0f, 0.0f,
+       2.0f, 0.0f, 2.0f,    -2.0f, 0.0f, 2.0f,      0.0f, 4.0f, 0.0f,
+     -2.0f, 0.0f, 2.0f,    -2.0f, 0.0f, -2.0f,     0.0f, 4.0f, 0.0f
+    };
+ 
+    batch_trangle.Begin(GL_TRIANGLES, 12);
+    batch_trangle.CopyVertexData3f(vPyramid);
+    batch_trangle.End();
+    //=================================//
+ 
+    //=============trangleFun=============//
+    GLfloat vFan[8][3];
+    vFan[0][0] = 0.0;
+    vFan[0][1] = 0.0;
+    vFan[0][2] = 0.0;
+    GLfloat r1 = 3.0;
+    GLint index1 = 1;
+    for (GLfloat angle=0.0; angle<M3D_2PI; angle+=(M3D_2PI/6.0f),index1++)
     {
-    // Clear the window with current clearing color
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-
-    GLfloat vRed[] = { 1.0f, 0.0f, 0.0f, 0.5f };
-    GLfloat vGreen[] = { 0.0f, 1.0f, 0.0f, 1.0f };
-    GLfloat vBlue[] = { 0.0f, 0.0f, 1.0f, 1.0f };
-    GLfloat vBlack[] = { 0.0f, 0.0f, 0.0f, 1.0f };
-
-
-    shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vGreen);
-    greenBatch.Draw();
-
-    shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vRed);
-    redBatch.Draw();
-
-    shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vBlue);
-    blueBatch.Draw();
-
-    shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vBlack);
-    blackBatch.Draw();
-
-
-
+        vFan[index1][0] = GLfloat(cos(angle)*r1);
+        vFan[index1][1] = GLfloat(sin(angle)*r1);
+        vFan[index1][2] = -0.5;
+    }
+    //封闭图像轮廓
+    index1++;
+    vFan[index1][0] = r1;
+    vFan[index1][1] = 0.0;
+    vFan[index1][2] = 0.0;
+    batch_trangleFan.Begin(GL_TRIANGLE_FAN, 8);
+    batch_trangleFan.CopyVertexData3f(vFan);
+    batch_trangleFan.End();
+    //=================================//
+ 
+    //=============trangleStrip============//
+    GLfloat vStrip[100][3];
+    GLfloat r2 = 3.0;
+    GLint index2 = 0;
+    for (GLfloat angle=0.0; angle<M3D_2PI; angle+=(M3D_2PI/20))
+    {
+        GLfloat tempX = GLfloat(cos(angle)*r2);
+        GLfloat tempY = GLfloat(sin(angle)*r2);
+ 
+        vStrip[index2][0] = tempX;
+        vStrip[index2][1] = tempY;
+        vStrip[index2][2] = 0.5;
+        index2++;
+ 
+        vStrip[index2][0] = tempX;
+        vStrip[index2][1] = tempY;
+        vStrip[index2][2] = -0.5;
+        index2++;
+    }
+    //封闭图像轮廓
+    vStrip[index2][0] = r2;
+    vStrip[index2][1] = 0.0;
+    vStrip[index2][2] = 0.5;
+    index2++;
+ 
+    vStrip[index2][0] = r2;
+    vStrip[index2][1] = 0.0;
+    vStrip[index2][2] = -0.5;
+    index2++;
+ 
+    batch_trangleStrip.Begin(GL_TRIANGLE_STRIP, index2);
+    batch_trangleStrip.CopyVertexData3f(vStrip);
+    batch_trangleStrip.End();
+    //=================================//
+}
+ 
+void DrawBatch(GLBatch *pBatch)
+{
+    shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeLine.GetModelViewProjectionMatrix() ,vGreen);
+    pBatch->Draw();
+ 
+    //绘制轮廓曲线
+    glPolygonOffset(-1.0, -1.0);
+    glEnable(GL_POLYGON_OFFSET_LINE);
+    //打开抗锯齿
+    glEnable(GL_LINE_SMOOTH);
+    //开启混合模式
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-    shaderManager.UseStockShader(GLT_SHADER_IDENTITY, vRed);
-    squareBatch.Draw();
+    //将GLBatch类的Draw函数的绘制模式改成线条模式
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    glLineWidth(2.5);
+    shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeLine.GetModelViewProjectionMatrix(), vBlack);
+    pBatch->Draw();
+    //将GLBatch类的Draw函数的绘制模式改成填充模式
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    glDisable(GL_POLYGON_OFFSET_LINE);
+    glLineWidth(1.0);
     glDisable(GL_BLEND);
+}
+ 
+// 执行渲染场景
+void RenderScene()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    //默认模型视图矩阵入栈
+    modelViewStack.PushMatrix();
+    //当前模型视图矩阵乘视图
+    M3DMatrix44f mCamera;
+    cameraFrame.GetCameraMatrix(mCamera);
+    modelViewStack.MultMatrix(mCamera);
     
-
-    // Flush drawing commands
+    
+    //当前模型视图矩阵乘模型矩阵
+    M3DMatrix44f mObject;
+    objectFrame.GetCameraMatrix(mObject);
+    modelViewStack.MultMatrix(mObject);
+    
+    
+    //GetModelViewProjectionMatrix()函数会把模型视图矩阵左乘透视矩阵构成 模型视图透视矩阵
+    shaderManager.UseStockShader(GLT_SHADER_FLAT, transformPipeLine.GetModelViewProjectionMatrix(), vBlack);
+ 
+    switch(g_step)
+    {
+    case 0:
+        glPointSize(4.0f);
+        batch_points.Draw();
+        glPointSize(1.0f);
+        break;
+    case 1:
+        glLineWidth(2.0f);
+        batch_line.Draw();
+        glLineWidth(1.0f);
+        break;
+    case 2:
+        glLineWidth(2.0f);
+        batch_lineStrip.Draw();
+        glLineWidth(1.0f);
+        break;
+    case 3:
+        glLineWidth(2.0f);
+        batch_lineClose.Draw();
+        glLineWidth(1.0f);
+        break;
+    case 4:
+        DrawBatch(&batch_trangle);
+        break;
+    case 5:
+        DrawBatch(&batch_trangleStrip);
+        break;
+    case 6:
+        DrawBatch(&batch_trangleFan);
+        break;
+    default:
+        break;
+    }
+    //当前模型视图矩阵出栈，恢复成默认矩阵
+    modelViewStack.PopMatrix();
     glutSwapBuffers();
+}
+
+// 键盘其他按键操作，切换渲染方式
+void KeyBoardCallBack(unsigned char key, int x, int y)
+{
+    if ('a' == key)
+    {
+        g_step++;
+        if (g_step > 6)
+        {
+            g_step = 0;
+        }
+        switch(g_step)
+        {
+        case 0:
+            glutSetWindowTitle("GL_points");
+            break;
+        case 1:
+            glutSetWindowTitle("GL_lines");
+            break;
+        case 2:
+            glutSetWindowTitle("GL_lineStrip");
+            break;
+        case 3:
+            glutSetWindowTitle("GL_lineClose");
+            break;
+        case 4:
+            glutSetWindowTitle("GL_trangle");
+            break;
+        case 5:
+            glutSetWindowTitle("GL_trangleStrip");
+            break;
+        case 6:
+            glutSetWindowTitle("GL_trangleFun");
+            break;
+        }
+        glutPostRedisplay();
     }
+}
 
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Window has changed size, or has just been created. In either case, we need
-// to use the window dimensions to set the viewport and the projection matrix.
+// 键盘方向键操作回调
+void SpecialKey(int key, int x, int y)
+{
+    //上下方向键绕X轴旋转，左右方向键绕Y轴旋转
+    switch(key)
+    {
+    case GLUT_KEY_UP:
+        objectFrame.RotateWorld(m3dDegToRad(-5.0), 1.0, 0.0, 0.0);
+        break;
+    case GLUT_KEY_DOWN:
+        objectFrame.RotateWorld(m3dDegToRad(5.0), 1.0, 0.0, 0.0);
+        break;
+    case GLUT_KEY_LEFT:
+        objectFrame.RotateWorld(m3dDegToRad(-5.0), 0.0, 1.0, 0.0);
+        break;
+    case GLUT_KEY_RIGHT:
+        objectFrame.RotateWorld(m3dDegToRad(5.0), 0.0, 1.0, 0.0);
+        break;
+    default:
+        break;
+    }
+    glutPostRedisplay();
+}
+ 
 void ChangeSize(int w, int h)
-    {
+{
     glViewport(0, 0, w, h);
-    }
-
-///////////////////////////////////////////////////////////////////////////////
-// Main entry point for GLUT based programs
-int main(int argc, char* argv[])
-    {
-    gltSetWorkingDirectory(argv[0]);
-    
+    //创建透视矩阵
+    viewFrustum.SetPerspective(35.0, float(w)/h, 1.0, 50);
+    projectionStack.LoadMatrix(viewFrustum.GetProjectionMatrix());
+    //创建模型视图矩阵（单位矩阵）
+    modelViewStack.LoadIdentity();
+}
+ 
+int main(int argc, char *argv[])
+{
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH);
     glutInitWindowSize(800, 600);
-    glutCreateWindow("Move Block with Arrow Keys to see blending");
+    glutCreateWindow("GL_points");
     
-    GLenum err = glewInit();
-    if (GLEW_OK != err)
-        {
-        // Problem: glewInit failed, something is seriously wrong.
-        fprintf(stderr, "Error: %s\n", glewGetErrorString(err));
-        return 1;
-        }
-    
+    // 注册监听回调函数
     glutReshapeFunc(ChangeSize);
+    glutKeyboardFunc(KeyBoardCallBack);
+    glutSpecialFunc(SpecialKey);
     glutDisplayFunc(RenderScene);
-    glutSpecialFunc(SpecialKeys);
-
-    SetupRC();
-
-    glutMainLoop();
-    return 0;
+ 
+    GLenum ret = glewInit();
+    if (GLEW_OK != ret)
+    {
+        fprintf(stderr, "glew error %s", glewGetErrorString(ret));
+        return 1;
     }
+    
+    SetupRC();
+    glutMainLoop();
+ 
+    return 0;
+}
