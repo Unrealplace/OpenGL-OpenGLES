@@ -8,23 +8,30 @@
 
 // 存储着色器管理工具类
 GLShaderManager     shaderManager;
-// 投影矩阵堆栈
-GLMatrixStack       modelViewMatrix;
 // 模型视图矩阵堆栈
+GLMatrixStack       modelViewMatrix;
+// 投影矩阵堆栈
 GLMatrixStack       projectionMatrix;
 // 设置观察者坐标
 GLFrame             cameraFrame;
 // 设置图形环绕时，视图坐标
 GLFrame             objectFrame;
-//设置图片绘制时的投影方式
+// 设置图片绘制时的投影方式,视景体
 GLFrustum           viewFrustum;
 //容器类
 GLBatch             triangleBatch;
-//几何变换的管道
+
+//transformPipeline:它是变换管道，类型是 GLGeometryTransform，专门用来管理投影和模型矩阵的 。
+//其实就是把两个矩阵堆栈都存到他这个管道里，方便我们用的时候拿出来。
+//如果不使用这个管道，在RenderScene里这段代码
+// shaderManager.UseStockShader(GLT_SHADER_DEFAULT_LIGHT, transformPipeline.GetModelViewMatrix(), transformPipeline.GetProjectionMatrix(), vRed);
+// 修改为从各自的堆栈里获取矩阵也能实现相同效果
+// shaderManager.UseStockShader(GLT_SHADER_DEFAULT_LIGHT, modelViewMatix.GetMatrix(), projectionMatrix.GetMatrix(), vRed);
+// 几何变换的管道
 GLGeometryTransform transformPipeLine;
 
 //一个黑色 一个绿色
-GLfloat vGreen[] = { 0.0f, 1.0f, 0.0f, 1.0f };
+GLfloat vGreen[] = { 0.3f, .4f, 0.3f, 1.0f };
 GLfloat vBlack[] = { 0.0f, 0.0f, 0.0f, 1.0f };
  
 void SetupRC()
@@ -37,7 +44,11 @@ void SetupRC()
     glEnable(GL_DEPTH_TEST);
     //设置变换管线以使用两个矩阵堆栈
     transformPipeLine.SetMatrixStacks(modelViewMatrix, projectionMatrix);
-    //把相机往后移，要不然可能会看不到图，感兴趣的可以改改数值就懂了是啥意思了。
+    
+    // 把相机往后移，要不然可能会看不到图，感兴趣的可以改改数值就懂了是啥意思了。
+    // 为了让效果明显，将观察者坐标位置Z移动往屏幕里移动15个单位位置
+    // 参数：表示离屏幕之间的距离。 负数，是往屏幕后面移动；正数，往屏幕前面移动
+    // GLFrame类型，表示camera
     cameraFrame.MoveForward(-15);
     //通过三角形创建金字塔
     GLfloat vPyramid[12][3] = {
@@ -61,7 +72,6 @@ void SetupRC()
     triangleBatch.Begin(GL_TRIANGLES, 12);
     triangleBatch.CopyVertexData3f(vPyramid);
     triangleBatch.End();
-    
 }
 
 // 召唤场景
@@ -69,19 +79,39 @@ void RenderScene(void)
 {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
     
+    // 坐标转换过程
+    // 压栈
+    //    modelViewMatrix.PushMatrix();
+    //    这句代码的意思是压栈，如果 PushMatix() 括号里是空的，就代表是把栈顶的矩阵复制一份，再压栈到它的顶部。
+    //    如果不是空的，比如是括号里是单元矩阵，那么就代表压入一个单元矩阵到栈顶了。
+    //
     modelViewMatrix.PushMatrix();
     
+    // 摄像机矩阵
     M3DMatrix44f camera;
     cameraFrame.GetCameraMatrix(camera);
+    
+    //    将modelViewMatrix 的堆栈中的矩阵 与 mOjbectFrame 矩阵相乘，
+    //    存储到modelViewMatrix矩阵堆栈中modelViewMatrix.MultMatrix(mObjectFrame);
+    //    这句代码的意思是把 模型视图矩阵堆栈 的 栈顶 的矩阵copy出一份来和新矩阵进行矩阵相乘，然后再将相乘的结果赋值给栈顶的矩阵。
+
     modelViewMatrix.MultMatrix(camera);
     
-    
+    // 只要使用 GetMatrix 函数就可以获取矩阵堆栈顶部的值，这个函数可以进行2次重载。
+    // 用来使用GLShaderManager 的使用。或者是获取顶部矩阵的顶点副本数据
     M3DMatrix44f obj;
     objectFrame.GetMatrix(obj);
     modelViewMatrix.MultMatrix(obj);
     
+    //使用默认光源着色器
+    //通过光源、阴影效果跟提现立体效果
+    //参数1：GLT_SHADER_FLAT 着色器类型
+    //参数2：模型视图矩阵
+    //参数3：投影矩阵
+    //参数4：基本颜色值
     shaderManager.UseStockShader(GLT_SHADER_FLAT,transformPipeLine.GetModelViewProjectionMatrix(),vGreen);
     triangleBatch.Draw();
+    
     
     //画黑色边框
     glPolygonOffset(-1.0f, -1.0f);// 偏移深度，在同一位置要绘制填充和边线，会产生z冲突，所以要偏移
@@ -117,13 +147,14 @@ void RenderScene(void)
     glDisable(GL_BLEND);
     glDisable(GL_LINE_SMOOTH);
     
-    
+    //把栈顶的矩阵出栈，恢复为原始的矩阵堆栈，这样就不会影响后续的操作了。
     modelViewMatrix.PopMatrix();
     glutSwapBuffers();
 }
 
 
 // 键盘方向键操作回调
+// 控制Object的移动，从而改变视口，这里是对物体坐标系进行旋转
 void SpecialKey(int key, int x, int y)
 {
     //上下方向键绕X轴旋转，左右方向键绕Y轴旋转
@@ -144,6 +175,7 @@ void SpecialKey(int key, int x, int y)
     default:
         break;
     }
+    // 重新刷新window
     glutPostRedisplay();
 }
  
@@ -152,12 +184,16 @@ void SpecialKey(int key, int x, int y)
 void ChangeSize(int w, int h)
 {
     glViewport(0, 0, w, h);
-    //设置投影矩阵
-    viewFrustum.SetPerspective(35, float(w)/float(h), 1, 500);
-    //加载投影矩阵
-    projectionMatrix.LoadMatrix(viewFrustum.GetProjectionMatrix());
-    //加载单元矩阵
-    modelViewMatrix.LoadIdentity();
+    
+   //3.setPerspective函数的参数是一个从顶点方向看去的视场角度（用角度值表示）
+   // 设置透视模式(这里是透视投影，还有一个方法是设置正投影)，初始化其透视矩阵
+   viewFrustum.SetPerspective(35.0f, float(w)/float(h), 1.0f, 100.0f);
+   
+   //4.把透视矩阵加载到透视矩阵堆栈中
+   projectionMatrix.LoadMatrix(viewFrustum.GetProjectionMatrix());
+   
+    //modelViewMatrix 矩阵堆栈 加载单元矩阵,这一步可以省略，因为堆栈底部默认就是一个单元矩阵
+   modelViewMatrix.LoadIdentity();
 }
 
  
