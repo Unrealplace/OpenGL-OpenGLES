@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B643C6F524A5E20A00298438 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B643C6F424A5E20A00298438 /* main.cpp */; };
+		B643C6F924A5E21F00298438 /* libGLTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E1624A2F36100170A07 /* libGLTools.a */; };
+		B643C6FA24A5E21F00298438 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0424A2F33800170A07 /* OpenGL.framework */; };
+		B643C6FB24A5E21F00298438 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0224A2F33100170A07 /* GLUT.framework */; };
 		DD487DFB24A2F31A00170A07 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD487DFA24A2F31A00170A07 /* main.cpp */; };
 		DD487E0324A2F33100170A07 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0224A2F33100170A07 /* GLUT.framework */; };
 		DD487E0524A2F33800170A07 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0424A2F33800170A07 /* OpenGL.framework */; };
@@ -26,6 +30,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		B643C6F024A5E20A00298438 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 		DD487DF524A2F31A00170A07 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -65,6 +78,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B643C6F224A5E20A00298438 /* flower_torus */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = flower_torus; sourceTree = BUILT_PRODUCTS_DIR; };
+		B643C6F424A5E20A00298438 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD487DF724A2F31A00170A07 /* OpenGL_Demos */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = OpenGL_Demos; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD487DFA24A2F31A00170A07 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD487E0224A2F33100170A07 /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
@@ -94,6 +109,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		B643C6EF24A5E20A00298438 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B643C6F924A5E21F00298438 /* libGLTools.a in Frameworks */,
+				B643C6FA24A5E21F00298438 /* OpenGL.framework in Frameworks */,
+				B643C6FB24A5E21F00298438 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DD487DF424A2F31A00170A07 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +162,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B643C6F324A5E20A00298438 /* flower_torus */ = {
+			isa = PBXGroup;
+			children = (
+				B643C6F424A5E20A00298438 /* main.cpp */,
+			);
+			path = flower_torus;
+			sourceTree = "<group>";
+		};
 		DD487DEE24A2F31A00170A07 = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +177,7 @@
 				DD487E1D24A2F3B400170A07 /* pyramid */,
 				DD487E2824A2F3E200170A07 /* geometry */,
 				DD487E3924A2F54900170A07 /* pyamid_texture */,
+				B643C6F324A5E20A00298438 /* flower_torus */,
 				DD487DF824A2F31A00170A07 /* Products */,
 				DD487E0124A2F33100170A07 /* Frameworks */,
 			);
@@ -156,6 +190,7 @@
 				DD487E1C24A2F3B400170A07 /* pyramid */,
 				DD487E2724A2F3E100170A07 /* geometry */,
 				DD487E3824A2F54900170A07 /* pyamid_texture */,
+				B643C6F224A5E20A00298438 /* flower_torus */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -244,6 +279,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		B643C6F124A5E20A00298438 /* flower_torus */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B643C6F824A5E20A00298438 /* Build configuration list for PBXNativeTarget "flower_torus" */;
+			buildPhases = (
+				B643C6EE24A5E20A00298438 /* Sources */,
+				B643C6EF24A5E20A00298438 /* Frameworks */,
+				B643C6F024A5E20A00298438 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = flower_torus;
+			productName = flower_torus;
+			productReference = B643C6F224A5E20A00298438 /* flower_torus */;
+			productType = "com.apple.product-type.tool";
+		};
 		DD487DF624A2F31A00170A07 /* OpenGL_Demos */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DD487DFE24A2F31A00170A07 /* Build configuration list for PBXNativeTarget "OpenGL_Demos" */;
@@ -321,6 +373,9 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = mpm;
 				TargetAttributes = {
+					B643C6F124A5E20A00298438 = {
+						CreatedOnToolsVersion = 11.3.1;
+					};
 					DD487DF624A2F31A00170A07 = {
 						CreatedOnToolsVersion = 11.3;
 					};
@@ -352,11 +407,20 @@
 				DD487E1B24A2F3B400170A07 /* pyramid */,
 				DD487E2624A2F3E100170A07 /* geometry */,
 				DD487E3724A2F54900170A07 /* pyamid_texture */,
+				B643C6F124A5E20A00298438 /* flower_torus */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		B643C6EE24A5E20A00298438 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B643C6F524A5E20A00298438 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DD487DF324A2F31A00170A07 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -392,6 +456,30 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
+		B643C6F624A5E20A00298438 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		B643C6F724A5E20A00298438 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 		DD487DFC24A2F31A00170A07 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -602,6 +690,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		B643C6F824A5E20A00298438 /* Build configuration list for PBXNativeTarget "flower_torus" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B643C6F624A5E20A00298438 /* Debug */,
+				B643C6F724A5E20A00298438 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DD487DF224A2F31A00170A07 /* Build configuration list for PBXProject "OpenGL_Demos" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

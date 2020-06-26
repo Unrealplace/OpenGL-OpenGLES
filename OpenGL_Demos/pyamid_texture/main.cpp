@@ -116,7 +116,7 @@ void SetupRC()
     
     glBindTexture(GL_TEXTURE_2D, textureId);
     
-    LoadTGATexture("/Users/mpm/Desktop/纹理贴图/纹理贴图/Texture/stone.tga", GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR, GL_CLAMP_TO_EDGE);
+    LoadTGATexture("/Users/liyang/OpenGL-OpenGLES/OpenGL_Demos/pyamid_texture/Texture/stone.tga", GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR, GL_CLAMP_TO_EDGE);
     //设置变换管线以使用两个矩阵堆栈
     transformPipeLine.SetMatrixStacks(modelViewMatrix, projectionMatrix);
     
