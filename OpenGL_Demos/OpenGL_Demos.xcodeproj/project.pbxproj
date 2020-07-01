@@ -27,6 +27,11 @@
 		DD487E3F24A2F55200170A07 /* libGLTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E1624A2F36100170A07 /* libGLTools.a */; };
 		DD487E4024A2F55200170A07 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0424A2F33800170A07 /* OpenGL.framework */; };
 		DD487E4124A2F55200170A07 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0224A2F33100170A07 /* GLUT.framework */; };
+		DD487E4C24AC233B00170A07 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD487E4B24AC233B00170A07 /* main.cpp */; };
+		DD487E5024AC235000170A07 /* libGLTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E1624A2F36100170A07 /* libGLTools.a */; };
+		DD487E5124AC235000170A07 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0424A2F33800170A07 /* OpenGL.framework */; };
+		DD487E5224AC235000170A07 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0224A2F33100170A07 /* GLUT.framework */; };
+		DD52E14924AC93CB00C81EEF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD52E14824AC93CB00C81EEF /* main.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -75,6 +80,24 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		DD487E4724AC233B00170A07 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		DD52E14424AC93CB00C81EEF /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +129,10 @@
 		DD487E3824A2F54900170A07 /* pyamid_texture */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = pyamid_texture; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD487E3A24A2F54900170A07 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD487E4324A2F57000170A07 /* stone.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = stone.tga; sourceTree = "<group>"; };
+		DD487E4924AC233B00170A07 /* Objects */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Objects; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD487E4B24AC233B00170A07 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		DD52E14624AC93CB00C81EEF /* rotate_object */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rotate_object; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD52E14824AC93CB00C81EEF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -159,6 +186,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DD487E4624AC233B00170A07 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD487E5024AC235000170A07 /* libGLTools.a in Frameworks */,
+				DD487E5124AC235000170A07 /* OpenGL.framework in Frameworks */,
+				DD487E5224AC235000170A07 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD52E14324AC93CB00C81EEF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -178,6 +222,8 @@
 				DD487E2824A2F3E200170A07 /* geometry */,
 				DD487E3924A2F54900170A07 /* pyamid_texture */,
 				B643C6F324A5E20A00298438 /* flower_torus */,
+				DD487E4A24AC233B00170A07 /* Objects */,
+				DD52E14724AC93CB00C81EEF /* rotate_object */,
 				DD487DF824A2F31A00170A07 /* Products */,
 				DD487E0124A2F33100170A07 /* Frameworks */,
 			);
@@ -191,6 +237,8 @@
 				DD487E2724A2F3E100170A07 /* geometry */,
 				DD487E3824A2F54900170A07 /* pyamid_texture */,
 				B643C6F224A5E20A00298438 /* flower_torus */,
+				DD487E4924AC233B00170A07 /* Objects */,
+				DD52E14624AC93CB00C81EEF /* rotate_object */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -274,6 +322,22 @@
 				DD487E4324A2F57000170A07 /* stone.tga */,
 			);
 			path = Texture;
+			sourceTree = "<group>";
+		};
+		DD487E4A24AC233B00170A07 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				DD487E4B24AC233B00170A07 /* main.cpp */,
+			);
+			path = Objects;
+			sourceTree = "<group>";
+		};
+		DD52E14724AC93CB00C81EEF /* rotate_object */ = {
+			isa = PBXGroup;
+			children = (
+				DD52E14824AC93CB00C81EEF /* main.cpp */,
+			);
+			path = rotate_object;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +428,40 @@
 			productReference = DD487E3824A2F54900170A07 /* pyamid_texture */;
 			productType = "com.apple.product-type.tool";
 		};
+		DD487E4824AC233B00170A07 /* Objects */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD487E4F24AC233B00170A07 /* Build configuration list for PBXNativeTarget "Objects" */;
+			buildPhases = (
+				DD487E4524AC233B00170A07 /* Sources */,
+				DD487E4624AC233B00170A07 /* Frameworks */,
+				DD487E4724AC233B00170A07 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Objects;
+			productName = Objects;
+			productReference = DD487E4924AC233B00170A07 /* Objects */;
+			productType = "com.apple.product-type.tool";
+		};
+		DD52E14524AC93CB00C81EEF /* rotate_object */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DD52E14C24AC93CB00C81EEF /* Build configuration list for PBXNativeTarget "rotate_object" */;
+			buildPhases = (
+				DD52E14224AC93CB00C81EEF /* Sources */,
+				DD52E14324AC93CB00C81EEF /* Frameworks */,
+				DD52E14424AC93CB00C81EEF /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = rotate_object;
+			productName = rotate_object;
+			productReference = DD52E14624AC93CB00C81EEF /* rotate_object */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -388,6 +486,12 @@
 					DD487E3724A2F54900170A07 = {
 						CreatedOnToolsVersion = 11.3;
 					};
+					DD487E4824AC233B00170A07 = {
+						CreatedOnToolsVersion = 11.3;
+					};
+					DD52E14524AC93CB00C81EEF = {
+						CreatedOnToolsVersion = 11.3;
+					};
 				};
 			};
 			buildConfigurationList = DD487DF224A2F31A00170A07 /* Build configuration list for PBXProject "OpenGL_Demos" */;
@@ -408,6 +512,8 @@
 				DD487E2624A2F3E100170A07 /* geometry */,
 				DD487E3724A2F54900170A07 /* pyamid_texture */,
 				B643C6F124A5E20A00298438 /* flower_torus */,
+				DD487E4824AC233B00170A07 /* Objects */,
+				DD52E14524AC93CB00C81EEF /* rotate_object */,
 			);
 		};
 /* End PBXProject section */
@@ -450,6 +556,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD487E3B24A2F54900170A07 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD487E4524AC233B00170A07 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD487E4C24AC233B00170A07 /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DD52E14224AC93CB00C81EEF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DD52E14924AC93CB00C81EEF /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -687,6 +809,48 @@
 			};
 			name = Release;
 		};
+		DD487E4D24AC233B00170A07 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DD487E4E24AC233B00170A07 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DD52E14A24AC93CB00C81EEF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DD52E14B24AC93CB00C81EEF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -740,6 +904,24 @@
 			buildConfigurations = (
 				DD487E3D24A2F54900170A07 /* Debug */,
 				DD487E3E24A2F54900170A07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD487E4F24AC233B00170A07 /* Build configuration list for PBXNativeTarget "Objects" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD487E4D24AC233B00170A07 /* Debug */,
+				DD487E4E24AC233B00170A07 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DD52E14C24AC93CB00C81EEF /* Build configuration list for PBXNativeTarget "rotate_object" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DD52E14A24AC93CB00C81EEF /* Debug */,
+				DD52E14B24AC93CB00C81EEF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
