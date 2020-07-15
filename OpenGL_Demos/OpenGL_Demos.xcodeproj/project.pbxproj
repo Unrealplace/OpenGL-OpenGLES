@@ -32,6 +32,10 @@
 		DD487E5124AC235000170A07 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0424A2F33800170A07 /* OpenGL.framework */; };
 		DD487E5224AC235000170A07 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0224A2F33100170A07 /* GLUT.framework */; };
 		DD52E14924AC93CB00C81EEF /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DD52E14824AC93CB00C81EEF /* main.cpp */; };
+		DDC868F324BD472000081638 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DDC868F224BD472000081638 /* main.cpp */; };
+		DDC868F724BD472F00081638 /* libGLTools.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E1624A2F36100170A07 /* libGLTools.a */; };
+		DDC868F824BD472F00081638 /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0424A2F33800170A07 /* OpenGL.framework */; };
+		DDC868F924BD472F00081638 /* GLUT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD487E0224A2F33100170A07 /* GLUT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -98,6 +102,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		DDC868EE24BD472000081638 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +146,9 @@
 		DD487E4B24AC233B00170A07 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DD52E14624AC93CB00C81EEF /* rotate_object */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = rotate_object; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD52E14824AC93CB00C81EEF /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		DDC868F024BD472000081638 /* texture_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = texture_1; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDC868F224BD472000081638 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		DDF3300D24BF044800B1A703 /* stone.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = stone.tga; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +219,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		DDC868ED24BD472000081638 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDC868F724BD472F00081638 /* libGLTools.a in Frameworks */,
+				DDC868F824BD472F00081638 /* OpenGL.framework in Frameworks */,
+				DDC868F924BD472F00081638 /* GLUT.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -224,6 +250,7 @@
 				B643C6F324A5E20A00298438 /* flower_torus */,
 				DD487E4A24AC233B00170A07 /* Objects */,
 				DD52E14724AC93CB00C81EEF /* rotate_object */,
+				DDC868F124BD472000081638 /* texture_1 */,
 				DD487DF824A2F31A00170A07 /* Products */,
 				DD487E0124A2F33100170A07 /* Frameworks */,
 			);
@@ -239,6 +266,7 @@
 				B643C6F224A5E20A00298438 /* flower_torus */,
 				DD487E4924AC233B00170A07 /* Objects */,
 				DD52E14624AC93CB00C81EEF /* rotate_object */,
+				DDC868F024BD472000081638 /* texture_1 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -338,6 +366,15 @@
 				DD52E14824AC93CB00C81EEF /* main.cpp */,
 			);
 			path = rotate_object;
+			sourceTree = "<group>";
+		};
+		DDC868F124BD472000081638 /* texture_1 */ = {
+			isa = PBXGroup;
+			children = (
+				DDF3300D24BF044800B1A703 /* stone.tga */,
+				DDC868F224BD472000081638 /* main.cpp */,
+			);
+			path = texture_1;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,6 +499,23 @@
 			productReference = DD52E14624AC93CB00C81EEF /* rotate_object */;
 			productType = "com.apple.product-type.tool";
 		};
+		DDC868EF24BD472000081638 /* texture_1 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDC868F624BD472000081638 /* Build configuration list for PBXNativeTarget "texture_1" */;
+			buildPhases = (
+				DDC868EC24BD472000081638 /* Sources */,
+				DDC868ED24BD472000081638 /* Frameworks */,
+				DDC868EE24BD472000081638 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = texture_1;
+			productName = texture_1;
+			productReference = DDC868F024BD472000081638 /* texture_1 */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -492,6 +546,9 @@
 					DD52E14524AC93CB00C81EEF = {
 						CreatedOnToolsVersion = 11.3;
 					};
+					DDC868EF24BD472000081638 = {
+						CreatedOnToolsVersion = 11.3;
+					};
 				};
 			};
 			buildConfigurationList = DD487DF224A2F31A00170A07 /* Build configuration list for PBXProject "OpenGL_Demos" */;
@@ -514,6 +571,7 @@
 				B643C6F124A5E20A00298438 /* flower_torus */,
 				DD487E4824AC233B00170A07 /* Objects */,
 				DD52E14524AC93CB00C81EEF /* rotate_object */,
+				DDC868EF24BD472000081638 /* texture_1 */,
 			);
 		};
 /* End PBXProject section */
@@ -572,6 +630,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD52E14924AC93CB00C81EEF /* main.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DDC868EC24BD472000081638 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDC868F324BD472000081638 /* main.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -851,6 +917,32 @@
 			};
 			name = Release;
 		};
+		DDC868F424BD472000081638 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DDC868F524BD472000081638 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -922,6 +1014,15 @@
 			buildConfigurations = (
 				DD52E14A24AC93CB00C81EEF /* Debug */,
 				DD52E14B24AC93CB00C81EEF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDC868F624BD472000081638 /* Build configuration list for PBXNativeTarget "texture_1" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDC868F424BD472000081638 /* Debug */,
+				DDC868F524BD472000081638 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
