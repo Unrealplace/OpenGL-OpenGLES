@@ -99,10 +99,10 @@ void MakePyramid(GLBatch& pyramidBath) {
     pyramidBath.Begin(GL_TRIANGLES, 18, 1);
     
     M3DVector3f vApex = {0.f,1.f,0.f};
-    M3DVector3f vBackLeft = {-1.f,-1.f,-1};
-    M3DVector3f vBackRight = {1.f,-1.f,-1};
+    M3DVector3f vBackLeft = {-1.f,-1.f,-1.f};
+    M3DVector3f vBackRight = {1.f,-1.f,-1.f};
     M3DVector3f vFrontLeft = {-1.f,-1.f,1.f};
-    M3DVector3f vFrontRight = {1.f,-1.f,1};
+    M3DVector3f vFrontRight = {1.f,-1.f,1.f};
     
     // 法线
     M3DVector3f n;
@@ -111,6 +111,7 @@ void MakePyramid(GLBatch& pyramidBath) {
     m3dFindNormal(n, vBackLeft, vBackRight, vFrontRight);
     // vBackRight
     pyramidBath.Normal3fv(n);
+    //
     pyramidBath.MultiTexCoord2f(0, 0.f, 0.f);
     pyramidBath.Vertex3fv(vBackLeft);
     
@@ -126,20 +127,20 @@ void MakePyramid(GLBatch& pyramidBath) {
     
     
     //三角形B
-    m3dFindNormal(n, vFrontRight, vBackLeft, vFrontLeft);
+    m3dFindNormal(n, vFrontLeft, vBackLeft, vFrontRight);
     //vFrontLeft
     pyramidBath.Normal3fv(n);
-    pyramidBath.MultiTexCoord2f(0, 0.f, 1.f);
+    pyramidBath.MultiTexCoord2f(0, 1.f, 0.f);
     pyramidBath.Vertex3fv(vFrontLeft);
     
     //vBackLeft
     pyramidBath.Normal3fv(n);
-    pyramidBath.MultiTexCoord2f(0, 0.f, 0.f);
+    pyramidBath.MultiTexCoord2f(0, 1.f, 1.f);
     pyramidBath.Vertex3fv(vBackLeft);
     
     //vFrontRight
     pyramidBath.Normal3fv(n);
-    pyramidBath.MultiTexCoord2f(0, 1.f, 1.f);
+    pyramidBath.MultiTexCoord2f(0, 0.f, 0.f);
     pyramidBath.Vertex3fv(vFrontRight);
     
     // 金字塔前面
@@ -166,16 +167,16 @@ void MakePyramid(GLBatch& pyramidBath) {
     pyramidBath.Normal3fv(n);
     pyramidBath.MultiTexCoord2f(0, 0.5f, 1.f);
     pyramidBath.Vertex3fv(vApex);
-    
-    //vFrontLeft
-    pyramidBath.Normal3fv(n);
-    pyramidBath.MultiTexCoord2f(0, 0.f, 0.f);
-    pyramidBath.Vertex3fv(vFrontLeft);
-    
+
     //vBackLeft
     pyramidBath.Normal3fv(n);
-    pyramidBath.MultiTexCoord2f(0, 1.f, 0.f);
+    pyramidBath.MultiTexCoord2f(0, 0.f, 0.f);
     pyramidBath.Vertex3fv(vBackLeft);
+
+    //vFrontLeft
+    pyramidBath.Normal3fv(n);
+    pyramidBath.MultiTexCoord2f(0, 1.f, 0.f);
+    pyramidBath.Vertex3fv(vFrontLeft);
     
     
     // 金字塔右面
@@ -184,16 +185,16 @@ void MakePyramid(GLBatch& pyramidBath) {
     pyramidBath.Normal3fv(n);
     pyramidBath.MultiTexCoord2f(0, 0.5f, 1.f);
     pyramidBath.Vertex3fv(vApex);
-    
+
     //vBackRight
     pyramidBath.Normal3fv(n);
     pyramidBath.MultiTexCoord2f(0, 1.f, 0.f);
-    pyramidBath.Vertex3fv(vBackRight);
-    
+    pyramidBath.Vertex3fv(vFrontRight);
+
     //vFrontRight
     pyramidBath.Normal3fv(n);
     pyramidBath.MultiTexCoord2f(0, 0.f, 0.f);
-    pyramidBath.Vertex3fv(vFrontRight);
+    pyramidBath.Vertex3fv(vBackRight);
     
     // 金字塔背面
     m3dFindNormal(n, vApex, vBackRight, vBackLeft);
@@ -228,7 +229,7 @@ void SetupRC()
     
     glBindTexture(GL_TEXTURE_2D, textureID);
     
-    LoadTGATexture("/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/texture_1/stone.tga", GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE);
+    LoadTGATexture("/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/texture_1/brick.tga", GL_LINEAR_MIPMAP_NEAREST, GL_LINEAR, GL_CLAMP_TO_EDGE);
     
     MakePyramid(pyramidBath);
     

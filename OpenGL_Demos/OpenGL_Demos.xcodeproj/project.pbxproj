@@ -149,6 +149,7 @@
 		DDC868F024BD472000081638 /* texture_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = texture_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC868F224BD472000081638 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DDF3300D24BF044800B1A703 /* stone.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = stone.tga; sourceTree = "<group>"; };
+		DDF3300E24C002A900B1A703 /* brick.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = brick.tga; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -371,6 +372,7 @@
 		DDC868F124BD472000081638 /* texture_1 */ = {
 			isa = PBXGroup;
 			children = (
+				DDF3300E24C002A900B1A703 /* brick.tga */,
 				DDF3300D24BF044800B1A703 /* stone.tga */,
 				DDC868F224BD472000081638 /* main.cpp */,
 			);
