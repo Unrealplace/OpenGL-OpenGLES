@@ -74,7 +74,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
 //////////////////////// Fixed probably in 10.6.3
 #ifdef __APPLE__
 #define glGenVertexArrays glGenVertexArraysAPPLE
-#define glDeleteVertexArrays  glDeleteVertexArraysAPPLE
+#define glDeleteVertexArrys  glDeleteVertexArraysAPPLE
 #define glBindVertexArray	glBindVertexArrayAPPLE
 #ifndef OPENGL_ES
 #define glGenerateMipmap    glGenerateMipmapEXT
@@ -92,7 +92,7 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF S
    
 ///////////////////////////////////////////////////////
 // Macros for big/little endian happiness
-// These are intentionally written to be easy to understand what they 
+// These are intentionally written to be easy tounderstand what they 
 // are doing... no flames please on the inefficiency of these.
 #ifdef __BIG_ENDIAN__
 ///////////////////////////////////////////////////////////
