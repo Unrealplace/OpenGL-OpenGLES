@@ -1,21 +1,32 @@
 // Triangle.cpp
 // Our first OpenGL program that will just draw a triangle on the screen.
 
-#include <stdarg.h>
-#include <GLTools.h>            // OpenGL toolkit
-#include <GLShaderManager.h>    // Shader Manager Class
+#include <GLTools.h>    // OpenGL toolkit
+#include <GLMatrixStack.h>
+#include <GLFrame.h>
+#include <GLFrustum.h>
+#include <GLGeometryTransform.h>
+#include <StopWatch.h>
 
+#include <math.h>
 #ifdef __APPLE__
-#include <glut/glut.h>          // OS X version of GLUT
+#include <glut/glut.h>
 #else
 #define FREEGLUT_STATIC
-#include <GL/glut.h>            // Windows FreeGlut equivalent
+#include <GL/glut.h>
 #endif
 
-GLBatch    triangleBatch;
-GLShaderManager    shaderManager;
+GLFrame             viewFrame;
+GLFrustum           viewFrustum;
+GLTriangleBatch     torusBatch;
+GLMatrixStack       modelViewMatrix;
+GLMatrixStack       projectionMatrix;
+GLGeometryTransform transformPipeline;
 
-GLint    myIdentityShader;
+GLuint    flatShader;            // The Flat shader
+
+GLint    locMVP;                // The location of the ModelViewProjection matrix uniform
+GLint   locColor;            // The location of the color value uniform
 
 GLint LoadShaders(const char * szVertexProg,const char *szFragmentProg,...) {
     GLuint hVertexShader;
@@ -73,35 +84,6 @@ GLint LoadShaders(const char * szVertexProg,const char *szFragmentProg,...) {
     glAttachShader(hReturn,hVertexShader);
     glAttachShader(hReturn,hFragmentShader);
     
-//    int j=0;
-//    va_list arg_ptr;
-//    va_start(arg_ptr, i);
-//    printf("&i = %p\n", &i);//打印参数i在堆栈中的地址
-//    printf("arg_ptr = %p\n", arg_ptr);//打印va_start之后arg_ptr地址
-//    /*这时arg_ptr应该比参数i的地址高sizeof(int)个字节,即指向下一个参数的地址*/
-//    j=*((int *)arg_ptr);
-//    printf("%d %d\n", i, j);
-//    j=va_arg(arg_ptr, int);
-//    printf("arg_ptr = %p\n", arg_ptr);//打印va_arg后arg_ptr的地址
-//    /*这时arg_ptr应该比参数i的地址高sizeof(int)个字节,即指向下一个参数的地址,如果已经是最后一个参数，arg_ptr会为NULL*/
-//    va_end(arg_ptr);
-//    printf("%d %d\n", i, j);
-//
-    
-    
-    /*
-    va_list attributeList;
-    va_start(attributeList,szFragmentProg);
-    int iArgCount = va_arg(attributeList, int);
-    char *szNextArg;
-    for (int i = 0; i < iArgCount; i++) {
-        int index = va_arg(attributeList, int);
-        szNextArg = va_arg(attributeList, char *);
-        glBindAttribLocation(hReturn,index,szNextArg);
-    }
-    va_end(attributeList);
-     */
-    
     // 绑定属性位置和属性变量
     glBindAttribLocation(hReturn,GLT_ATTRIBUTE_VERTEX,"vVertex");
     glBindAttribLocation(hReturn,GLT_ATTRIBUTE_COLOR,"vColor");
@@ -132,6 +114,11 @@ GLint LoadShaders(const char * szVertexProg,const char *szFragmentProg,...) {
 void ChangeSize(int w, int h)
 {
     glViewport(0, 0, w, h);
+    
+    viewFrustum.SetPerspective(35.0f, float(w)/float(h), 1.0f, 100.0f);
+    
+    projectionMatrix.LoadMatrix(viewFrustum.GetProjectionMatrix());
+    transformPipeline.SetMatrixStacks(modelViewMatrix, projectionMatrix);
 }
 
 
@@ -142,42 +129,21 @@ void SetupRC()
 {
     // Blue background
     glClearColor(0.7f, 0.6f, 0.0f, 1.0f );
+    glEnable(GL_DEPTH_TEST);
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    viewFrame.MoveForward(4.0f);
+    gltMakeTorus(torusBatch, .80f, 0.25f, 52, 26);
+    flatShader = LoadShaders("/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/Shader_2_Uniform/vertex.h", "/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/Shader_2_Uniform/fragment.h",2,GLT_ATTRIBUTE_VERTEX,"vVertex",GLT_ATTRIBUTE_COLOR,"vColor");
     
-    shaderManager.InitializeStockShaders();
-    
-    // Load up a triangle
-    GLfloat vVerts[] = { -0.5f, 0.0f, 0.0f,
-        0.5f, 0.0f, 0.0f,
-        0.0f, 1.f, 0.0f };
-    
-    GLfloat vColors [] = { 1.0f, 0.0f, 0.0f, 1.0f,
-        0.0f, 1.0f, 0.0f, 1.0f,
-        1.0f, 0.0f, 1.0f, 1.0f };
-    
-    triangleBatch.Begin(GL_TRIANGLES, 3);
-    triangleBatch.CopyVertexData3f(vVerts);
-    triangleBatch.CopyColorData4f(vColors);
-    triangleBatch.End();
-    
-    myIdentityShader = LoadShaders("/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/Shader_1/vertex.h", "/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/Shader_1/fragment.h",2,GLT_ATTRIBUTE_VERTEX,"vVertex",GLT_ATTRIBUTE_COLOR,"vColor");
-    
-//    myIdentityShader = gltLoadShaderPairWithAttributes("/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/Shader_1/vertex.h", "/Users/mpm/OpenGL-OpenGLES/OpenGL_Demos/Shader_1/fragment.h", 2,
-//
-//                                                       GLT_ATTRIBUTE_VERTEX, "vVertex", GLT_ATTRIBUTE_COLOR, "vColor");
-    
-    GLint locTime,locIndex,locColor,locFlag;
-    locTime = glGetUniformLocation(myIdentityShader,"fTime");
-    locIndex = glGetUniformLocation(myIdentityShader,"iIndex");
-    locColor = glGetUniformLocation(myIdentityShader,"vColorValue");
-    locFlag = glGetUniformLocation(myIdentityShader,"bSomeFlag");
+    locMVP = glGetUniformLocation(flatShader,"mvpMatrix");
+    locColor = glGetUniformLocation(flatShader,"vColorValue");
 }
 
 ///////////////////////////////////////////////////////////////////////////////
 // Cleanup
 void ShutdownRC()
 {
-    glDeleteProgram(myIdentityShader);
-    
+    glDeleteProgram(flatShader);
 }
 
 
@@ -185,14 +151,21 @@ void ShutdownRC()
 // Called to draw scene
 void RenderScene(void)
 {
-    // Clear the window with current clearing color
+    static CStopWatch rotTimer;
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT | GL_STENCIL_BUFFER_BIT);
-    
-    glUseProgram(myIdentityShader);
-    triangleBatch.Draw();
-    
-    // Perform the buffer swap to display back buffer
+    modelViewMatrix.PushMatrix(viewFrame);
+    modelViewMatrix.Rotate(rotTimer.GetElapsedSeconds() * 10.f, 0.f, 1.f, 0.f);
+    GLfloat colorG = sin(rotTimer.GetElapsedSeconds());
+    GLfloat colorB = cos(rotTimer.GetElapsedSeconds());
+    GLfloat colorR = cos(rotTimer.GetElapsedSeconds());
+    GLfloat vColor[] = {colorR,colorG,colorB,1.0f};
+    glUseProgram(flatShader);
+    glUniform4fv(locColor,1,vColor);
+    glUniformMatrix4fv(locMVP,1,GL_FALSE,transformPipeline.GetModelViewProjectionMatrix());
+    torusBatch.Draw();
+    modelViewMatrix.PopMatrix();
     glutSwapBuffers();
+    glutPostRedisplay();
 }
 
 GLvoid PrintVersion()
