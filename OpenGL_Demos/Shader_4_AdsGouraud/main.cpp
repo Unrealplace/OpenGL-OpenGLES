@@ -1,8 +1,8 @@
 //
 //  main.cpp
-//  Shader_3_SimulatingLight
+//  Shader_4_AdsGouraud
 //
-//  Created by mpm on 2020/7/21.
+//  Created by mpm on 2020/7/22.
 //  Copyright © 2020 mpm. All rights reserved.
 //
 
