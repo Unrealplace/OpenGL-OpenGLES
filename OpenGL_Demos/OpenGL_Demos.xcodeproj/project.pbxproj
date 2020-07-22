@@ -202,6 +202,8 @@
 		DDAC0D7824C7DF9400D005E1 /* fragment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fragment.h; sourceTree = "<group>"; };
 		DDAC0D7D24C8365200D005E1 /* Shader_4_AdsGouraud */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Shader_4_AdsGouraud; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDAC0D7F24C8365200D005E1 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		DDAC0D8724C83AE400D005E1 /* vertex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = vertex.h; sourceTree = "<group>"; };
+		DDAC0D8824C83AEF00D005E1 /* fragment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = fragment.h; sourceTree = "<group>"; };
 		DDC868F024BD472000081638 /* texture_1 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = texture_1; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDC868F224BD472000081638 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		DDF3300D24BF044800B1A703 /* stone.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = stone.tga; sourceTree = "<group>"; };
@@ -487,6 +489,8 @@
 			isa = PBXGroup;
 			children = (
 				DDAC0D7F24C8365200D005E1 /* main.cpp */,
+				DDAC0D8724C83AE400D005E1 /* vertex.h */,
+				DDAC0D8824C83AEF00D005E1 /* fragment.h */,
 			);
 			path = Shader_4_AdsGouraud;
 			sourceTree = "<group>";
@@ -1195,7 +1199,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -1208,7 +1212,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
