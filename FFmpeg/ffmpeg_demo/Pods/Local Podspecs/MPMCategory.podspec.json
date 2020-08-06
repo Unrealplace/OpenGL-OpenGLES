@@ -1,0 +1,96 @@
+{
+  "name": "MPMCategory",
+  "version": "0.0.1",
+  "summary": "iOS开发分类扩展组件库",
+  "description": "TODO: Add long description of the pod here.",
+  "homepage": "http://120.26.216.233/ios/MPMSpecs",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "823890952@qq.com": "Done.Liu"
+  },
+  "source": {
+    "git": "http://120.26.216.233/ios/MPMCategory.git",
+    "tag": "0.0.1"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "source_files": "MPMCategory/MPMCategoryKit.h",
+  "public_header_files": "MPMCategory/MPMCategoryKit.h",
+  "requires_arc": true,
+  "subspecs": [
+    {
+      "name": "NSData",
+      "source_files": "MPMCategory/NSData/*.{h,m}"
+    },
+    {
+      "name": "NSDate",
+      "source_files": "MPMCategory/NSDate/*.{h,m}"
+    },
+    {
+      "name": "NSDictionary",
+      "source_files": "MPMCategory/NSDictionary/*.{h,m}"
+    },
+    {
+      "name": "NSString",
+      "source_files": "MPMCategory/NSString/*.{h,m}",
+      "dependencies": {
+        "YYText": [
+
+        ]
+      }
+    },
+    {
+      "name": "NSURL",
+      "source_files": "MPMCategory/NSURL/*.{h,m}",
+      "dependencies": {
+        "SDWebImage": [
+
+        ],
+        "SDWebImage/WebP": [
+
+        ]
+      }
+    },
+    {
+      "name": "UIAlertAction",
+      "source_files": "MPMCategory/UIAlertAction/*.{h,m}"
+    },
+    {
+      "name": "UIButton",
+      "source_files": "MPMCategory/UIButton/*.{h,m}"
+    },
+    {
+      "name": "UIFont",
+      "source_files": "MPMCategory/UIFont/*.{h,m}"
+    },
+    {
+      "name": "UIImage",
+      "source_files": "MPMCategory/UIImage/*.{h,m}"
+    },
+    {
+      "name": "UILabel",
+      "source_files": "MPMCategory/UILabel/*.{h,m}"
+    },
+    {
+      "name": "UITextView",
+      "source_files": "MPMCategory/UITextView/*.{h,m}"
+    },
+    {
+      "name": "UIView",
+      "source_files": "MPMCategory/UIView/*.{h,m}"
+    },
+    {
+      "name": "UIViewCreateTools",
+      "source_files": "MPMCategory/UIViewCreateTools/*.{h,m}",
+      "dependencies": {
+        "Masonry": [
+
+        ]
+      }
+    }
+  ]
+}

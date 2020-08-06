@@ -28,8 +28,8 @@
     
     self.dataSource = [NSMutableArray array];
     
-    NSArray *title = @[];
-    NSArray *titleClass = @[];
+    NSArray *title = @[@"使用VideoToolBox硬编解码h264文件"];
+    NSArray *titleClass = @[@"FFH264HWEncoder_DecoderViewController"];
     
     for (NSInteger i = 0; i < titleClass.count; i++) {
         FFTableModel *model = [[FFTableModel alloc] init];

@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF05CA115AE6E2A352860E45 /* Pods_ffmpeg_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3C1A9D2104FBC5CDB14E570 /* Pods_ffmpeg_demo.framework */; };
 		DDAF0BA124D535BE007EDD03 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0BA024D535BE007EDD03 /* AppDelegate.m */; };
 		DDAF0BA424D535BE007EDD03 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0BA324D535BE007EDD03 /* SceneDelegate.m */; };
 		DDAF0BA724D535BE007EDD03 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0BA624D535BE007EDD03 /* ViewController.m */; };
@@ -31,10 +32,16 @@
 		DDAF0C5424D56F89007EDD03 /* FFTableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C5324D56F89007EDD03 /* FFTableCell.m */; };
 		DDAF0C5724D57316007EDD03 /* FFTableModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C5624D57316007EDD03 /* FFTableModel.m */; };
 		DDAF0C5A24D57745007EDD03 /* FFBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C5924D57745007EDD03 /* FFBaseViewController.m */; };
-		DDAF0C5D24D57D63007EDD03 /* FFTestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C5C24D57D63007EDD03 /* FFTestViewController.m */; };
+		DDAF0C6024D7A6EF007EDD03 /* FFH264HWEncoder_DecoderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C5F24D7A6EF007EDD03 /* FFH264HWEncoder_DecoderViewController.m */; };
+		DDAF0C6624D7E327007EDD03 /* FFH264HWEncoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C6524D7E327007EDD03 /* FFH264HWEncoder.m */; };
+		DDAF0C6924D7EDEF007EDD03 /* FFH264HWDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C6824D7EDEF007EDD03 /* FFH264HWDecoder.m */; };
+		DDAF0C6D24D7EF00007EDD03 /* FFOpenGLRenderView.m in Sources */ = {isa = PBXBuildFile; fileRef = DDAF0C6C24D7EF00007EDD03 /* FFOpenGLRenderView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		47E58A694627675251497A54 /* Pods-ffmpeg_demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ffmpeg_demo.debug.xcconfig"; path = "Target Support Files/Pods-ffmpeg_demo/Pods-ffmpeg_demo.debug.xcconfig"; sourceTree = "<group>"; };
+		9E59F42B7A73ADCA1752AD84 /* Pods-ffmpeg_demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ffmpeg_demo.release.xcconfig"; path = "Target Support Files/Pods-ffmpeg_demo/Pods-ffmpeg_demo.release.xcconfig"; sourceTree = "<group>"; };
+		D3C1A9D2104FBC5CDB14E570 /* Pods_ffmpeg_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ffmpeg_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDAF0B9C24D535BE007EDD03 /* ffmpeg_demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ffmpeg_demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDAF0B9F24D535BE007EDD03 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DDAF0BA024D535BE007EDD03 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -181,8 +188,14 @@
 		DDAF0C5624D57316007EDD03 /* FFTableModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFTableModel.m; sourceTree = "<group>"; };
 		DDAF0C5824D57745007EDD03 /* FFBaseViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFBaseViewController.h; sourceTree = "<group>"; };
 		DDAF0C5924D57745007EDD03 /* FFBaseViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFBaseViewController.m; sourceTree = "<group>"; };
-		DDAF0C5B24D57D63007EDD03 /* FFTestViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFTestViewController.h; sourceTree = "<group>"; };
-		DDAF0C5C24D57D63007EDD03 /* FFTestViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFTestViewController.m; sourceTree = "<group>"; };
+		DDAF0C5E24D7A6EF007EDD03 /* FFH264HWEncoder_DecoderViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFH264HWEncoder_DecoderViewController.h; sourceTree = "<group>"; };
+		DDAF0C5F24D7A6EF007EDD03 /* FFH264HWEncoder_DecoderViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFH264HWEncoder_DecoderViewController.m; sourceTree = "<group>"; };
+		DDAF0C6424D7E327007EDD03 /* FFH264HWEncoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFH264HWEncoder.h; sourceTree = "<group>"; };
+		DDAF0C6524D7E327007EDD03 /* FFH264HWEncoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFH264HWEncoder.m; sourceTree = "<group>"; };
+		DDAF0C6724D7EDEF007EDD03 /* FFH264HWDecoder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFH264HWDecoder.h; sourceTree = "<group>"; };
+		DDAF0C6824D7EDEF007EDD03 /* FFH264HWDecoder.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFH264HWDecoder.m; sourceTree = "<group>"; };
+		DDAF0C6B24D7EF00007EDD03 /* FFOpenGLRenderView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FFOpenGLRenderView.h; sourceTree = "<group>"; };
+		DDAF0C6C24D7EF00007EDD03 /* FFOpenGLRenderView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FFOpenGLRenderView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,18 +217,29 @@
 				DDAF0C3F24D535EE007EDD03 /* libavcodec.a in Frameworks */,
 				DDAF0C4224D535EF007EDD03 /* libswresample.a in Frameworks */,
 				DDAF0C4024D535EE007EDD03 /* libavformat.a in Frameworks */,
+				BF05CA115AE6E2A352860E45 /* Pods_ffmpeg_demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1CC8292F2C76B8FE150BBDE1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				47E58A694627675251497A54 /* Pods-ffmpeg_demo.debug.xcconfig */,
+				9E59F42B7A73ADCA1752AD84 /* Pods-ffmpeg_demo.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DDAF0B9324D535BE007EDD03 = {
 			isa = PBXGroup;
 			children = (
 				DDAF0B9E24D535BE007EDD03 /* ffmpeg_demo */,
 				DDAF0B9D24D535BE007EDD03 /* Products */,
 				DDAF0C4524D53753007EDD03 /* Frameworks */,
+				1CC8292F2C76B8FE150BBDE1 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -230,6 +254,7 @@
 		DDAF0B9E24D535BE007EDD03 /* ffmpeg_demo */ = {
 			isa = PBXGroup;
 			children = (
+				DDAF0C6A24D7EE81007EDD03 /* H264HWEncoder_Decoder */,
 				DDAF0BB824D535EE007EDD03 /* ffmpeg */,
 				DDAF0B9F24D535BE007EDD03 /* AppDelegate.h */,
 				DDAF0BA024D535BE007EDD03 /* AppDelegate.m */,
@@ -239,8 +264,6 @@
 				DDAF0BA624D535BE007EDD03 /* ViewController.m */,
 				DDAF0C5824D57745007EDD03 /* FFBaseViewController.h */,
 				DDAF0C5924D57745007EDD03 /* FFBaseViewController.m */,
-				DDAF0C5B24D57D63007EDD03 /* FFTestViewController.h */,
-				DDAF0C5C24D57D63007EDD03 /* FFTestViewController.m */,
 				DDAF0C5524D57316007EDD03 /* FFTableModel.h */,
 				DDAF0C5624D57316007EDD03 /* FFTableModel.m */,
 				DDAF0C5224D56F89007EDD03 /* FFTableCell.h */,
@@ -472,8 +495,24 @@
 				DDAF0C4A24D53761007EDD03 /* VideoToolbox.framework */,
 				DDAF0C4824D5375A007EDD03 /* CoreGraphics.framework */,
 				DDAF0C4624D53754007EDD03 /* CoreMedia.framework */,
+				D3C1A9D2104FBC5CDB14E570 /* Pods_ffmpeg_demo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DDAF0C6A24D7EE81007EDD03 /* H264HWEncoder_Decoder */ = {
+			isa = PBXGroup;
+			children = (
+				DDAF0C5E24D7A6EF007EDD03 /* FFH264HWEncoder_DecoderViewController.h */,
+				DDAF0C5F24D7A6EF007EDD03 /* FFH264HWEncoder_DecoderViewController.m */,
+				DDAF0C6424D7E327007EDD03 /* FFH264HWEncoder.h */,
+				DDAF0C6524D7E327007EDD03 /* FFH264HWEncoder.m */,
+				DDAF0C6724D7EDEF007EDD03 /* FFH264HWDecoder.h */,
+				DDAF0C6824D7EDEF007EDD03 /* FFH264HWDecoder.m */,
+				DDAF0C6B24D7EF00007EDD03 /* FFOpenGLRenderView.h */,
+				DDAF0C6C24D7EF00007EDD03 /* FFOpenGLRenderView.m */,
+			);
+			path = H264HWEncoder_Decoder;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -483,9 +522,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DDAF0BB524D535C6007EDD03 /* Build configuration list for PBXNativeTarget "ffmpeg_demo" */;
 			buildPhases = (
+				5ECF1BC2F5B54BCBECBD303D /* [CP] Check Pods Manifest.lock */,
 				DDAF0B9824D535BE007EDD03 /* Sources */,
 				DDAF0B9924D535BE007EDD03 /* Frameworks */,
 				DDAF0B9A24D535BE007EDD03 /* Resources */,
+				9F6042A1A30FBD3E92B4C219 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -541,6 +582,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		5ECF1BC2F5B54BCBECBD303D /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ffmpeg_demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9F6042A1A30FBD3E92B4C219 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ffmpeg_demo/Pods-ffmpeg_demo-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ffmpeg_demo/Pods-ffmpeg_demo-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ffmpeg_demo/Pods-ffmpeg_demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DDAF0B9824D535BE007EDD03 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -550,10 +633,13 @@
 				DDAF0C5A24D57745007EDD03 /* FFBaseViewController.m in Sources */,
 				DDAF0C5424D56F89007EDD03 /* FFTableCell.m in Sources */,
 				DDAF0BA724D535BE007EDD03 /* ViewController.m in Sources */,
-				DDAF0C5D24D57D63007EDD03 /* FFTestViewController.m in Sources */,
 				DDAF0BA124D535BE007EDD03 /* AppDelegate.m in Sources */,
+				DDAF0C6024D7A6EF007EDD03 /* FFH264HWEncoder_DecoderViewController.m in Sources */,
+				DDAF0C6624D7E327007EDD03 /* FFH264HWEncoder.m in Sources */,
+				DDAF0C6924D7EDEF007EDD03 /* FFH264HWDecoder.m in Sources */,
 				DDAF0BB224D535C6007EDD03 /* main.m in Sources */,
 				DDAF0BA424D535BE007EDD03 /* SceneDelegate.m in Sources */,
+				DDAF0C6D24D7EF00007EDD03 /* FFOpenGLRenderView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,11 +777,14 @@
 		};
 		DDAF0BB624D535C6007EDD03 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 47E58A694627675251497A54 /* Pods-ffmpeg_demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H57Q7L6C8G;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg_demo/ffmpeg/**";
 				INFOPLIST_FILE = ffmpeg_demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -712,11 +801,14 @@
 		};
 		DDAF0BB724D535C6007EDD03 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9E59F42B7A73ADCA1752AD84 /* Pods-ffmpeg_demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = H57Q7L6C8G;
 				HEADER_SEARCH_PATHS = "$(PROJECT_DIR)/ffmpeg_demo/ffmpeg/**";
 				INFOPLIST_FILE = ffmpeg_demo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -19,7 +19,7 @@
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         self.textLab = [UILabel new];
-        self.textLab.frame = CGRectMake(0, 0, 200, 50);
+        self.textLab.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, 50);
         [self.contentView addSubview:self.textLab];
     }
     
